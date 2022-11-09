@@ -1,0 +1,391 @@
+\documentclass{homework}
+\author{Maya Basu}
+\class{Quantum Mechanics}
+\title{Class Notes}
+
+\newcommand{\inte}{\text{Int}}
+\newcommand{\clos}[1]{\overline{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\MM}{\mathbb{M}}
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\m}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\kt}{\rangle}
+\newcommand{\br}{\langle}
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{ \langle #1 |}
+\begin{document} 
+
+\maketitle
+
+\[E = \hbar \omega\]
+\[k = \frac{2\pi}{\lambda}\]
+
+\section{Postulates of Quantum Mechanics}
+\begin{enumerate}
+
+    \item After a measurement of $A$ that yields the result $a_n$, the quantum system is in a new state that is the normalized projection of the original system ket onto the ket (or kets) corresponding to the result of the measurement, $| \psi' \kt = \frac{P_n | \psi \kt}{\sqrt{ \br \psi | P_n | \psi \kt}}$
+    
+    \item The time evolution of a quantum system is determined by the Hamiltonian or total energy operator $H(t)$ through the Schrödinger equation $i\hbar \frac{d}{dt}| \psi (t) \kt = H(t)| \psi (t) \kt$
+
+\end{enumerate}
+
+
+
+
+\section{Representation of the Wave Function}
+
+\textbf{Postulate: }The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized $| \psi \kt$ 
+
+\subsection{Finite Basis}
+
+If there are a finite number of measurement outcomes, we can write the wave function as an abstract ket $\ket{\psi}$ where $$\ket{\psi} = \sum a_n\ket{a_n}$$
+and the bra is $$\bra{\psi} = \sum a_n^*\bra{a_n}$$
+In this representation, having a \textbf{complete and orthonormal} basis means that 
+\[\sum_n \PP_n = \sum \ket{a_n}\bra{a_n} = I, \bra{a_n}a_m \rangle  = \delta_{mn}\]
+
+
+\subsubsection{Spin}
+
+One example of a finite basis is spin. A finite basis is $+$ and $-$ in the $\hat{n}$ direction. In the $x,y,z$ directions we have:
+
+\[| +_x \kt = \frac{1}{\sqrt{2}}[|+_z \kt + |-_z \kt] = \frac{1}{\sqrt{2}} \m{ 1\\ 1},   | -_x \kt = \frac{1}{\sqrt{2}}[|+_z \kt - |-_z \kt]= \frac{1}{\sqrt{2}} \m{ 1\\ -1}\]
+
+
+\[| +_z \kt = \frac{1}{\sqrt{2}}[|+_x \kt + |-_x \kt] =  \m{ 1\\ 0},  | -_z \kt = \frac{1}{\sqrt{2}}[|+_x \kt - |-_x \kt] = \m{ 0\\ 1}\]
+
+\[| +_y \kt = \frac{1}{\sqrt{2}}[|+_z \kt + i|-_z \kt] = \frac{1}{\sqrt{2}} \m{ 1\\ i}, | -_y \kt = \frac{1}{\sqrt{2}}[|+_z  \kt - i|-_z \kt] = \frac{1}{\sqrt{2}} \m{ 1\\ -i}\]
+
+or more generally
+\[\ket{+_n} = \cos \frac{\theta}{2}\ket{+} + \sin \frac{\theta}{2}e^{i\phi}\ket{-}, \ket{-_n} = \sin \frac{\theta}{2}\ket{+} - \cos \frac{\theta}{2}e^{i\phi}\ket{-}\]
+
+
+\subsection{Continuous Basis}
+
+If we have a continuous basis such as position, then we can shift notation to a continuous function 
+\[\bra{x_i}\psi \kt = \psi(x)\]
+
+
+\subsection{Normalization and Measurement}
+
+Normalization means that the combined probability of measuring any outcome is $1$. So in the discrete case this means 
+\[\bra{\psi}\psi \kt = 1\]
+or
+\[\int_{-\infty}^{\infty}P(x)dx = \int_{-\infty}^{\infty}|\psi(x)|^2dx = 1\]
+(where $P(x) = |\psi(x)|^2$ is the \textbf{probability density})in the continuous case.
+
+To find the probability of measuring a state in a particular basis state, we want to find the absolute value squared of the projection of the state onto that basis. For the discrete case this is
+\[P_{a_n} = |\bra{a_n}\psi \kt|^2\]
+and for the continuous case, we need to integrate over the wave function to find out how much it overlaps with a basis, (this is the projection) then we can take the magnitude squared.
+\[P_{\phi_n} = |\bra{\phi_n}\psi \kt|^2 = \left|\int_{-\infty}^{\infty} \phi_n^*(x)\psi(x)dx\right|^2\]
+
+\section{Operators}
+
+
+Physical Observables are represented by operaters that act on kets, with the only possible measurement outcomes being an eignvalue of that operator.
+
+These operators are \textbf{hermitian}, which means they are equal to their own conjugate-transpose ($\dagger$). Additionally, if $A\ket{a} = \ket{b}$, then $\bra{a}A^{\dagger} = \bra{b}$
+
+\subsection{Operators in a Finite Basis}
+
+
+The spin operator $\hat{S}$ transforms under spacial rotation like a vector so we have $S_n = \hat{S}\cdot \hat{n}$ ($\hat{n} = \hat{i}\sin(\theta)\cos(\phi) + \hat{j}\sin(\theta)\sin(\phi) + \hat{k}\cos(\theta)$) or 
+\[S_n = S_x\sin(\theta)\cos(\phi) + S_y\sin(\theta)\sin(\phi) + S_z\cos(\theta)\]
+The eign values of $S_n$ are $\pm \frac{\hbar}{2}$. 
+
+\subsubsection{Matrix Representation}
+
+We can represent the spin component operators as matrices if we choose a basis (such as the basis of $S_z$). To get the elements of these matrices, we sandwitch it between two basis vectors like: 
+\[A = \m{\br + | A | + \kt & \br + | A | - \kt \\ \br - | A | + \kt & \br - | A | - \kt}\]
+Or generally, $A_{ij} = \br i | A | j \kt$. This is still called a matrix element even when the ket and bra are not basis vectors. Specifically, 
+
+\[S_z = \m{\hbar/2 & 0 \\ 0 & -\hbar/2}, S_x = \m{  0 & \hbar/2 \\ \hbar/2 & 0}, S_y = \m{ 0 & -i\hbar/2\\ i\hbar/2 & 0 }, S_n  = \frac{\hbar}{2}\m{\cos(\theta) & \sin(\theta)e^{-i\phi} \\\sin(\theta)e^{i\phi} & -\cos(\theta)}\]
+
+We can also represent the projection operators as matrices
+\[P_{+} =\ket{+}\bra{+}  = \m{1 & 0 \\ 0 & 0 }, P_{-} =\ket{-}\bra{-}  = \m{0 & 0 \\ 0 & 1 }\]
+
+
+\subsection{Operators in a continuous basis}
+
+\[\hat{x} = x\]
+\[\hat{p} = -i\hbar \frac{d}{dx}\]
+
+\section{Bound States}
+If the energy of a state is bounded by a higher potential energy on both sides then we get a discrete set of bounds states. Transitioning between these states is possible with the emmition or absorbtion of a photon which has energy $E_p = E_i - E_j$, where this implies $f_{ij} = \frac{\omega_{ij}}{\hbar} = \frac{E_i - E_j}{h} $ with corresponding wavelength $\lambda_{ij} = \frac{c}{f_{ij}} = \frac{hc}{E_i - E_j}$ for $E_i > E_j$
+Suppose we have a (time independent) well of any shape. Then to find $\psi(x,t)$, we want to find the energy eignstates of this system. Since, if we can write $\psi$ in term of energy eign states, we know how to time evolve these forward (by multiplying by the appropriate complex exponential $\psi(x,t) = \sum_n c_n \psi_{E_n}e^{-iE_nt/\hbar}$). To find these energy eignstates, we use the energy eign value equation, or the time independent Schrodinger equation, which is
+\[\hat{H}\phi_{E_n} = E_n\phi_{E_n}.\]
+In general, the criteria we have for finding a solution to any shape of well is that the energy eign state is continuous, and it's derivative is continuous when $V \neq \infty$. 
+
+\subsection{Infinite Square Well}
+
+\subsubsection{If the well is from $(0,L)$}
+
+We have $-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\phi_E(x) = E \phi_E(x)$. Which we rewrite as 
+\[\frac{d^2}{dx^2}\phi_E(x) = -k^2 \phi_E(x)\]
+where 
+\[k^2 = \frac{2mE}{\hbar^2}\]
+is called the wave vector. Applying boundry conditions allows us to get
+\[k_n = n\frac{\pi}{L}\]
+or
+\[E_n = \frac{n^2\pi^2\hbar^2}{2mL^2}\]
+with
+\[\phi_{E_n} = \sqrt{\frac{2}{L}}\sin \left(\frac{n\pi x}{L}\right)\]
+This makes sense since if we relate the wave vector to the wavelength by $k_n = \frac{2\pi}{\lambda}$ which implies $L = n\frac{\lambda_n}{2}$, or the well must contain an integer number of half wavelengths. 
+
+\subsubsection{If the well is from $(-a,a)$}
+
+Then the energy eignstates are
+\[\phi_{E_n}(x) = \sqrt{\frac{1}{a}}\cos \left( \frac{n\pi x}{2a} \right), n = 1,3,5...\]
+\[\phi_{E_n}(x) = \sqrt{\frac{1}{a}}\sin \left( \frac{n\pi x}{2a} \right), n = 2,4,6...\]
+
+\subsection{Finite Square Well}
+
+
+Suppose we have a finite square well $(-a,a)$. Inside the box we have the same wave vector as in the infinite square well case, namely $k = \sqrt{\frac{2mE}{\hbar^2}}$. Outside the wall though, we have
+\[(-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+ V(x))\phi_E(x) = E \phi_E(x)\]
+or
+\[\frac{d^2}{dx^2}\phi_E(x) = q^2\phi_E(x)\]
+where $q = \sqrt{\frac{2m}{\hbar^2}(V_0 - E)}$.
+So this gives a general solution 
+ \[ \phi_{E_n}(x) = \begin{cases} 
+          Ae^{qx}+Be^{-qx} & x\leq -a \\
+          Csin(kx)+ Dcos(kx) & -a \leq x\leq a \\
+          Fe^{qx}+Ge^{-qx} & a \leq x 
+       \end{cases}
+    \]
+$F, B$ must be $0$ so the wavefunction does not diverge. Additionally, the potential energy is symetric, so the hamiltonian commutes with the partiy operator, so the eign states must be either even or odd. Finally, symetry gives $|A| = |G|$. This gives the even solutions:
+ \[ \phi_{E_n}(x) = \begin{cases} 
+          Ae^{qx} & x\leq -a \\
+         Dcos(kx) & -a \leq x\leq a \\
+          Ae^{-qx} & a \leq x 
+       \end{cases}
+    \]
+And odd solutions:
+ \[ \phi_{E_n}(x) = \begin{cases} 
+          Ae^{qx} & x\leq -a \\
+         Csin(kx) & -a \leq x\leq a \\
+          -Ae^{-qx} & a \leq x 
+       \end{cases}
+    \]
+For a finite well, bound states do not necceseraly constitue a complete basis! (we may need unbound states with $E>V_0$ in the sum.
+
+Matching at boundry conditions gives the equation $k\tan(ka) = q$ for even solutions, and $-k\cot(ka) = q$ for odd solutions. 
+
+One thing to note is that the nth energy level has $n$ antinotes and $(n-1)$ nodes
+
+
+\section{Unbound States}
+
+\subsection{Free Particles}
+
+In the case that $V(x) = 0$ every where, we get
+\[\frac{d^2}{dx^2}\phi_E(x) = -k^2 \phi_E(x)\]
+where 
+\[k^2 = \frac{2mE}{\hbar^2}\]
+and 
+\[\phi_E(x) = Ae^{ikx}+Be^{-ikx}.\]
+To time evolve this (it is already in the energy eign basis) we have
+\[\psi_E = \phi_E e^{-iEt/\hbar}\]
+and if we write $E = \hbar \omega$ then this gives
+\[\psi_E = Ae^{ik(x - \omega t/k} + Be^{-ik(x + \omega t/k}\]
+which is a function $f(x \pm vt)$ so it is a solution to the wave equation.
+
+\subsubsection{Momentum eignstates}
+
+We can see that
+\[\hat{p}\phi_E (x) = (-\hbar\frac{d}{dx})Ae^{ikx} = \hbar k \phi_E (x)\]
+or that $\phi_p (x) = \frac{1}{\sqrt{2\pi\hbar}}e^{ipx/\hbar}$ is an eignstate of the momentum operator with eign value $p = \hbar k$. Since $k = \frac{2\pi}{\lambda}$, this becomes
+\[p = \frac{h}{\lambda}\]
+which is historically
+\[\lambda_{de Broglie} = frac{h}{p}\]
+
+These eign states are also energy eign states, with energy $E = \frac{p^2}{2m}$. However, there is degeneracy, a given momentum has a ddefinite energy, but a given energy eign states is a super position of two momenta. 
+
+\subsubsection{Momentum/Position Space conversion}
+
+The wave function in momentum space is $\psi(p) = \bra{p}\psi \kt$, but to avoid confusion (this is an entirely different function then $\psi(x)$, we rename as $\bra{p}\psi \kt = \phi(p)$ with completness giving
+\[\psi(x) = \int_{-\infty}^{\infty}\phi_p(x)\phi(p)dp\]
+or (using the explicit momentum eignstates)
+\[\psi(x) = \frac{1}{\sqrt{2\pi \hbar}}\int_{-\infty}^{\infty}\phi(p)e^{ipx/\hbar}dp\]
+(The fourier transform!) and going the other way we get
+\[\phi(p) = \frac{1}{\sqrt{2\pi \hbar}}\int_{-\infty}^{\infty}\psi(p)e^{-ipx/\hbar}dp\]
+
+
+\subsection{Scattering Due to a finite well or barrier}
+Suppose we have a potential
+ \[ V(x) = \begin{cases} 
+          0 & x\leq -a \\
+         -V_0 & -a \leq x\leq a \\
+          0 & a \leq x 
+       \end{cases}
+    \]
+Then we get
+ \[ \begin{cases} 
+          (-\frac{\hbar^2}{2m}\frac{d^2}{dx^2} - V_0)\phi_E(x) = E\phi_E(x) & |x|\leq a \\
+         (-\frac{\hbar^2}{2m}\frac{d^2}{dx^2} )\phi_E(x) = E\phi_E(x) &  \leq |x|\ge a \\
+       
+       \end{cases}
+    \]
+And since $E> V_0$ we expect sinusoidal soutions in both regions, we we can define two wave vectors $k_1 = \sqrt{\frac{2mE}{\hbar^2}}$, $k_2 = \sqrt{\frac{2m(E+V_0)}{\hbar^2}}$ so we get
+
+ \[ \begin{cases} 
+          \frac{d^2}{dx^2} \phi_E(x) = -k_2^2\phi_E(x) & |x|\leq a \\
+         \frac{d^2}{dx^2} \phi_E(x) = -k_1^2\phi_E(x) &  \leq |x|\ge a \\
+       
+       \end{cases}
+    \]
+
+So the general solution is 
+ \[ \phi(x) = \begin{cases} 
+          Ae^{ik_1x} + BAe^{-ik_1x} & x\leq -a \\
+        Ce^{ik_2x} + DAe^{-ik_2x} & -a \leq x\leq a \\
+          Fe^{ik_1x} + GAe^{-ik_1x} & a \leq x 
+       \end{cases}
+    \]
+
+
+
+If on the other hand, we have
+ \[ V(x) = \begin{cases} 
+          0 & x\leq -a \\
+         V_0 & -a \leq x\leq a \\
+          0 & a \leq x 
+       \end{cases}
+    \]
+(But $E>V_0$)Then we can just switch the sign of $V_0$ to get the right results. 
+
+\section{Tunneling Through Barriers}
+
+Suppose we have a potential barrier
+
+ \[ V(x) = \begin{cases} 
+          0 & x\leq -a \\
+         V_0 & -a \leq x\leq a \\
+          0 & a \leq x 
+       \end{cases}
+    \]
+But $E < V_0$ so we get
+ \[ \begin{cases} 
+          (-\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V_0)\phi_E(x) = E\phi_E(x) & |x|\leq a \\
+         (-\frac{\hbar^2}{2m}\frac{d^2}{dx^2} )\phi_E(x) = E\phi_E(x) &  \leq |x|\ge a \\
+       
+       \end{cases}
+    \]
+But in the barrier, we have a real exponential solution, so we get
+ \[ \begin{cases} 
+          \frac{d^2}{dx^2} \phi_E(x) = q^2\phi_E(x) & |x|\leq a \\
+         \frac{d^2}{dx^2} \phi_E(x) = -k^2\phi_E(x) &  \leq |x|\ge a \\
+       
+       \end{cases}
+    \]
+Where $q = \sqrt{\frac{2m(V_0 - E)}{\hbar^2}}$, $k = \sqrt{\frac{2mE}{\hbar^2}}$
+
+
+
+
+\section{Time evolution}
+
+Now that we have the energy eign states, we can time evolve the system. We know
+\[\ket{\psi(t)} = \sum_n c_ne^{-iE_nt/\hbar}\ket{E_n}\]
+at $t = 0$, we have
+\[\ket{\psi(0)} = \sum_n c_n\ket{E_n} \rightarrow c_n = \bra{E_n}\psi(0) \kt\]
+where $|c_n|^2$ is the time independent probability of measuring the state to have energy $E_n$. 
+In spacial notation, we have
+\[\psi(x,t) = \sum_n c_n\phi_n(x)e^{-iE_nt/\hbar}\]
+and
+\[c_n = \int_{-\infty}^{\infty}\phi_n^*(x)\psi(x,0)dx\]
+
+
+
+\section{Uncertainty Principle}
+
+For two observables,
+\[\Delta A \Delta B \ge \frac{1}{2}|\br [A,B] \kt|\]
+with $\Delta A = \sqrt{\br A^2 \kt  - \br A \kt^2}$. In the case of momentum and position, $[\hat{x}, \hat{p}] = i \hbar$ so we get
+\[\Delta x \Delta p \ge \frac{\hbar}{2} \]
+
+
+
+\section{Harmonic Oscillator}
+
+For a classical harmonic oscilator, we have $-kx = m\frac{d^2}{dt^2}x$ where we define $\omega = \sqrt{\frac{k}{m}}$ to get $\frac{d^2x}{dt^2} = -\omega^2 x(t)$, or $x(t) = A\cos(\omega t + \phi)$. The Hamiltonian for this system is 
+\[\hat{H} = \frac{\hat{p}^2}{2m} + \frac{1}{2}m\omega^2\hat{x}^2\]
+The eignvalues for the harmonic oscilator are
+\[E_n = \hbar \omega(n + \frac{1}{2}), n = 0,1,2, \cdots\]
+(Note that we start at $0$ so the ground state is $E_0$. To factor the hamiltonia, we define
+\[a = \sqrt{\frac{m\omega}{2\hbar}}(\hat{x} + i \frac{\hat{p}}{m\omega})\]
+(raising operator)
+\[a^{\dagger} = \sqrt{\frac{m\omega}{2\hbar}}(\hat{x} - i \frac{\hat{p}}{m\omega})\]
+(lowering operator).  And inverting these relations give
+\[\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(a + a^{\dagger})\]
+\[\hat{p} = i\sqrt{\frac{\hbar m \omega}{2}}(a^{\dagger} - a)\]
+
+So 
+\[a^{\dagger}a = \frac{m\omega}{2 \hbar}(\hat{x}^2 + \frac{\hat{p}^2}{m^2\omega^2}+ \frac{i}{m\omega}[\hat{x},\hat{p}])\]
+\[a^{\dagger}a = \frac{m\omega}{2 \hbar}(\hat{x}^2 + \frac{\hat{p}^2}{m^2\omega^2})  - \frac{1}{2}\]
+or
+\[H = \hbar \omega (a^{\dagger}a+ \frac{1}{2})\]
+And 
+\[aa^{\dagger} = \frac{m\omega}{2 \hbar}(\hat{x}^2 + \frac{\hat{p}^2}{m^2\omega^2})  + \frac{1}{2}\]
+so
+\[[a,a^{\dagger}] = aa^{\dagger} - a^{\dagger}a = 1\]
+and
+\[[H,a] = -\hbar \omega a\]
+\[[H,a^{\dagger}] = \hbar \omega a^{\dagger}\]
+
+
+If we define
+\[N = a^{\dagger}a (H = \hbar \omega(N + \frac{1}{2}))\]
+then we have
+\[N\ket{n} = n\ket{n}\]
+and
+\[a\ket{n} = \sqrt{n}\ket{n   - 1}\]
+\[a^{\dagger}\ket{n} = \sqrt{n+1}\ket{n  +1}\]
+or 
+\[\phi_n = \frac{1}{n!}\left( \sqrt{\frac{m\omega}{2\hbar}}(x - \frac{\hbar}{m \omega}\frac{d}{dx})\right)\phi_0\]
+
+\subsubsection{Conclusions}
+So we have
+\[E_n = \hbar \omega (n + \frac{1}{2}), n = 0,1,2,3 \cdots\]
+with eign states $\ket{E_n} = \ket{n}$
+\[H\ket{E_n} = E_n \ket{n} = (n + \frac{1}{2})\hbar \omega \ket{n}\]
+
+\subsection{In Position Space}
+
+To get the position space representation, we want to find the solution to 
+\[-\frac{\hbar^2}{2m}\frac{d^2\phi_E}{dx^2}+ \frac{1}{2}m\omega^2 x^2 \phi_E = E_n \phi_E.\]
+The "termination condition" from the ladder gives
+\[(x+ \frac{\hbar}{m\omega}\frac{d}{dx})\phi_0 = 0\]
+so we have $\phi_0 = \left( \frac{m\omega}{\pi\hbar}\right)^{1/4}e^{-m\omegax^2/2\hbar}$. Then to get the general state we just have to apply the raising operator $n$ times, getting
+\[\phi_n(x) = \frac{1}{\sqrt{n!}}\left( \sqrt{\frac{m\omega}{2\hbar}}(x  - \frac{\hbar}{m\omega}\frac{d}{dx})\right)^n\phi_0.\]
+If we write $\xi = \sqrt{\frac{m\omega}{\hbar}}x$ then we have 
+\[\phi_n = \left( \frac{m\omega}{\pi \hbar}\right)^{1/4}\frac{1}{\sqrt{2^nn!}}H_n(\xi)e^{-\xi^2/2}\]
+
+\subsection{In Momentum Space}
+\[\phi_n(p) = \left(\frac{1}{\pi m \omega \hbar} \right)^{1/4}\frac{1}{\sqrt{2^nn!}}H_n(\frac{p}{\sqrt{m\omega\hbar}})e^{-p^2/2m\omega\hbar}\]
+
+
+
+
+
+
+\section{Linear Algebra Stuff}
+
+
+\subsection{Finding Eignvalues and Eignvectors}
+
+To find the eign values we can use the equation $\det(A - \lambda I) = 0$
+
+The equation for the eign vectors of an operator $A$ is 
+
+\[\m{A_{11} & A_{12} \\ A_{21} & A_{22}}\m{c_{n1} \\ c_{n2}} = a_n \m{c_{n1} \\ c_{n2}}\]
+which multiplies out to the equations
+\[(A_{11} - a_n)c_{n1} + A_{12}c_{n2} = 0\]
+\[A_{21}c_{n1}+ (A_{22}- a_n)c_{n2} = 0\]
+
+\end{document}
+
+
+
+
